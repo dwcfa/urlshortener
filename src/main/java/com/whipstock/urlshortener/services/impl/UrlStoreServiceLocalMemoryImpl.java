@@ -18,12 +18,12 @@ public class UrlStoreServiceLocalMemoryImpl implements UrlStoreService {
     this.urlMap = new ConcurrentHashMap<>(urlStoreServiceConfig.getInitialCapacity());
   }
 
-  public String storeUrl(String url, String shortUrl) throws DuplicateKeyException {
-    String existing = urlMap.putIfAbsent(url, shortUrl);
+  public String storeUrl(String key, String url) throws DuplicateKeyException {
+    String existing = urlMap.putIfAbsent(key, url);
     if (existing != null) {
       throw new DuplicateKeyException("Url already exists");
     }
-    return url;
+    return key;
   }
 
   public String getUrl(String shortUrl) {

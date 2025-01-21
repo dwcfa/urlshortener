@@ -18,8 +18,10 @@ public class UrlEncodeServiceImplTest {
   @Test
   @SneakyThrows
   public void encode_validURL_Success() {
-    String url = urlEncodeService.encode("https://www.google.com").get();
-    assertEquals(URL_KEY_LENGTH, url.length());
+    String key = urlEncodeService.encode("https://www.google.com").get();
+    final String decode = urlEncodeService.decode(key);
+    assertEquals(URL_KEY_LENGTH, key.length());
+    assertEquals("https://www.google.com", decode);
   }
 
   @Test
