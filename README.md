@@ -1,14 +1,16 @@
 # urlshortener
-Shortens URL's 
+
+ShortLink service is a URL shortening service where you enter a URL such as https://example.com/library/react and it returns a short URL such as http://short.est/GeAi9K.
 
 ### Build Directions
-Runs on Java 11
-Requires Maven and Lombok
+* Runs on Java 11
+* Requires Maven and Lombok
+* Very few dependences, should build with no issues.
 ```
 mvn clean install
 ```
 
-### Run use directions
+### Use directions
 This application has 2 method calls.
 * POST to /encode to save the url 
 * GET to retrieve the saved url /decode
@@ -47,7 +49,7 @@ http://localhost:8080/decode?key=D2NuTn
 
 ### Load Testing
 There is an included simple test script used with artillery https://www.artillery.io/
-This test will throw 429 errors (Too many requests)
+This test is made to force 429 errors (Too many requests)
 ```
 artillery run test.yaml
 ```

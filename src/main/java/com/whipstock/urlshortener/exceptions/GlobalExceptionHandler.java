@@ -12,11 +12,17 @@ import org.springframework.web.context.request.WebRequest;
 @Slf4j
 public class GlobalExceptionHandler {
   @ExceptionHandler(value = {TaskRejectedException.class})
-  public ResponseEntity<TooManyRequestsException> handleExceptionTaskRejectedException(Exception ex, WebRequest request) {
+  public ResponseEntity<TooManyRequestsException> handleTaskRejectedException(Exception ex, WebRequest request) {
     log.error("DuplicateKeyException check RandomGenerator "
         + "if you see this more than once in a week, there is a problem", ex);
     return new ResponseEntity<>(new TooManyRequestsException(HttpStatus.TOO_MANY_REQUESTS.getReasonPhrase()), HttpStatus.TOO_MANY_REQUESTS);
   }
+
+  @ExceptionHandler(value = {InvalidUrlException.class})
+  public ResponseEntity<InvalidUrlException> handleInvalidUrlException(InvalidUrlException ex, WebRequest request) {
+    return new ResponseEntity<>(ex, HttpStatus.BAD_REQUEST);
+  }
+
   @ExceptionHandler(value = {Exception.class})
   public ResponseEntity<Exception> handleException(Exception ex, WebRequest request) {
     log.error("Exception caught at GlobalExceptionHandler. ", ex);

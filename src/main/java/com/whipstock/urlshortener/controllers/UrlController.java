@@ -2,6 +2,7 @@ package com.whipstock.urlshortener.controllers;
 
 import com.whipstock.urlshortener.configuration.UrlStoreEncodeConfig;
 import com.whipstock.urlshortener.exceptions.DuplicateKeyException;
+import com.whipstock.urlshortener.exceptions.InvalidUrlException;
 import com.whipstock.urlshortener.model.DecodeResponse;
 import com.whipstock.urlshortener.model.EncodeRequest;
 import com.whipstock.urlshortener.model.EncodeResponse;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
+import com.whipstock.urlshortener.util.UrlValidator;
 @RestController
 @AllArgsConstructor
 /*
@@ -24,10 +25,12 @@ IE better chance of hitting the lottery.
 public class UrlController {
   private final UrlEncodeService urlEncodeService;
   private final UrlStoreEncodeConfig urlStoreEncodeConfig;
+  private final UrlValidator urlValidator;
 
   @PostMapping(value = "/encode", produces = "application/json")
   public EncodeResponse encode(@RequestBody EncodeRequest encode)
-      throws ExecutionException, InterruptedException, DuplicateKeyException {
+      throws ExecutionException, InterruptedException, DuplicateKeyException, InvalidUrlException {
+    urlValidator.validate(encode.getUrl());
     try {
       return new EncodeResponse()
           .setNewUrl(urlStoreEncodeConfig.getRedirectUrl() + urlEncodeService.encode(encode.getUrl()).get());

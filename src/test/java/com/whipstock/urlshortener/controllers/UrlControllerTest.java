@@ -20,7 +20,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 @SpringBootTest
 public class UrlControllerTest {
 
-  public static final String URL = "https://www.google.com/";
+  public static final String URL = "https://www.google.com";
   public static final String KEY = "key";
   public static final String NEW_URL = "http://short.est/key";
   @Autowired
