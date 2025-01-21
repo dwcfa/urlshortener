@@ -8,6 +8,7 @@ Requires Maven and Lombok
 mvn clean install
 ```
 
+### Run use directions
 This application has 2 method calls.
 * POST to /encode to save the url 
 * GET to retrieve the saved url /decode
@@ -42,4 +43,11 @@ wget --no-check-certificate --quiet \
 URL Request.(Again change key)
 ```
 http://localhost:8080/decode?key=D2NuTn
+```
+
+### Load Testing
+There is an included simple test script used with artillery https://www.artillery.io/
+This test will throw 429 errors (Too many requests)
+```
+artillery run test.yaml
 ```

@@ -1,0 +1,11 @@
+config:
+  target: 'http://localhost:8080'
+  phases:
+    - duration: 20
+      arrivalRate: 200
+scenarios:
+  - flow:
+      - post:
+          url: "/encode"
+          json:
+            url: "https://www.solventum.com/"
