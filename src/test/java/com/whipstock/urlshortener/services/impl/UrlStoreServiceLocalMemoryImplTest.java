@@ -14,7 +14,7 @@ public class UrlStoreServiceLocalMemoryImplTest {
   void setUp() {
     UrlStoreServiceConfig urlStoreServiceConfig;
     urlStoreServiceConfig = new UrlStoreServiceConfig();
-    urlStoreServiceConfig.setInitialCapacity(100);
+    urlStoreServiceConfig.setInitialCapacity(1000);
     urlStoreService = new UrlStoreServiceLocalMemoryImpl(urlStoreServiceConfig) ;
   }
 
